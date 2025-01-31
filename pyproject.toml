@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "image_classification"
+version = "0.1.0"
+description = "Experiemnting with image classification"
+authors = ["John Rizzo <johnrizzo1@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+tensorflow = "^2.18.0"
+tensorflow-metal = "^1.2.0"
+jupyter = "^1.1.1"
+matplotlib = "^3.10.0"
+tensorflow-keras = "^0.1"
+torch = "^2.6.0"
+torchvision = "^0.21.0"
+torchaudio = "^2.6.0"
+pycocotools = "^2.0.8"
+
+# [tool.poetry.scripts]
+# main = "aiwebcam.main:mymain"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
