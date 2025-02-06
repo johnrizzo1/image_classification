@@ -27,7 +27,7 @@
       systems = [ "x86_64-linux" "i686-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
 
       perSystem = { config, self', inputs', pkgs, system, lib, ... }: {
-        # packages.default = self'.devShells.default;
+        packages.default = self'.devShells.default;
 
         devenv.shells.default = {
           devenv.root =
