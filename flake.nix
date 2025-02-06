@@ -27,7 +27,13 @@
       systems = [ "x86_64-linux" "i686-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
 
       perSystem = { config, self', inputs', pkgs, system, lib, ... }: {
-        packages.default = self'.devShells.default;
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+          config.cudaSupport = ! pkgs.stdenv.isDarwin;
+        };
+
+        # packages.default = self'.devShells.default;
 
         devenv.shells.default = {
           devenv.root =
@@ -53,7 +59,25 @@
             curl
             portaudio
             ffmpeg
+            # (python3.withPackages (ps: with ps; [
+            #   scikit-learn
+            #   datasets
+            #   jupyter
+            #   keras
+            #   matplotlib
+            #   numpy
+            #   pandas
+            #   pip
+            #   pycocotools
+            #   tensorflow
+            #   torch
+            #   torchaudio
+            #   torchvision
+            # ]))
           ] ++ lib.optionals pkgs.stdenv.isDarwin [
+            # (python3.withPackages (ps: with ps; [
+            #   tensorflow-metal
+            # ]))
             darwin.apple_sdk.frameworks.CoreFoundation
             darwin.apple_sdk.frameworks.Security
             darwin.apple_sdk.frameworks.SystemConfiguration
@@ -63,10 +87,11 @@
           languages.python.enable = true;
           languages.python.venv.enable = true;
           languages.python.uv.enable = true;
-          languages.python.poetry.enable = true;
+          # languages.python.poetry.enable = true;
 
           difftastic.enable = true;
           dotenv.enable = true;
+          dotenv.filename = [ ".env" ];
 
           cachix.enable = true;
           cachix.pull = [ "pre-commit-hooks" ];
@@ -76,6 +101,7 @@
             echo '-----------------------------------'
             echo -n 'Git:    '; git --version
             echo -n 'Python: '; python --version
+            echo ""
           '';
         };
       };

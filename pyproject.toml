@@ -1,26 +1,19 @@
-[tool.poetry]
-name = "image_classification"
+[project]
+name = "image-classification"
 version = "0.1.0"
-description = "Experiemnting with image classification"
-authors = ["John Rizzo <johnrizzo1@gmail.com>"]
+description = "Add your description here"
 readme = "README.md"
-package-mode = false
-
-[tool.poetry.dependencies]
-python = "^3.12"
-tensorflow = "^2.18.0"
-tensorflow-metal = "^1.2.0; sys_platform == 'darwin'"
-jupyter = "^1.1.1"
-matplotlib = "^3.10.0"
-tensorflow-keras = "^0.1"
-torch = "^2.6.0"
-torchvision = "^0.21.0"
-torchaudio = "^2.6.0"
-pycocotools = "^2.0.8"
-
-# [tool.poetry.scripts]
-# main = "aiwebcam.main:mymain"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires-python = ">=3.12"
+dependencies = [
+    "datasets[vision]>=3.2.0",
+    "jupyter>=1.1.1",
+    "keras>=3.8.0",
+    "matplotlib>=3.10.0",
+    "scikit-learn>=1.6.1",
+    "tensorflow-keras>=0.1",
+    "tensorflow-metal>=1.2.0; sys_platform == 'darwin'",
+    "tensorflow>=2.18.0",
+    "torch>=2.6.0",
+    "torchaudio>=2.6.0",
+    "torchvision>=0.21.0",
+]
